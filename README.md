@@ -137,7 +137,7 @@ classDiagram
 
 
 <div align="center">
-    <img src="C:\Users\victor\Desktop\SQLdishdash.png" title="DER">
+    <img src="https://i.imgur.com/NZ7cDkA.png" title="DER">
 </div>
 
 
