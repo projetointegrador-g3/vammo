@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/446e35dd-5ba8-4cf9-8764-89bb7d679e10)# DishDash - Backend 
+# DishDash - Backend 
 
 
 
