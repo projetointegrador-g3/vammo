@@ -40,6 +40,7 @@ O projeto **DishDash** é o desenvolvimento de um backend robusto e escalável p
      - Consulta de Produtos:
        - Busca avançada por nome, categoria e preço.
        - Visualização detalhada do perfil de um produto.
+       - Visualização dos produtos disponiveis na promoção do dia.
      - Atualização de Dados:
        - Alterar nome, preço, informações ou foto do produto.
   3. **Gerenciamento de Usuários**:
