@@ -55,6 +55,7 @@ export class ViagemService {
         return await this.viagemRepository.save(viagem);
     }
 
+
     async update(viagem: Viagem): Promise<Viagem> {
 
         await this.findById(viagem.id);
@@ -63,6 +64,7 @@ export class ViagemService {
         return await this.viagemRepository.save(viagem);
     }
 
+    
     async delete(id: number): Promise<DeleteResult> {
 
         await this.findById(id);

@@ -41,4 +41,13 @@ export class ViagemController {
     return this.viagemService.delete(id);
   }
 
+
+  //Métodos Especiais
+  @Get('/origem/:origem')
+  @HttpCode(HttpStatus.OK)
+  findByTitulo(@Param('origrm') origem: string): Promise<Viagem[]>{
+    return this.viagemService.findAllByTitulo(origem)
+  }
+
+  
 }
