@@ -1,7 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { Transform, TransformFnParams } from "class-transformer"
 import { IsDate, IsEmail, IsNotEmpty, Max, Min, MinLength } from "class-validator"
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm"
+import {Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm"
+import { Viagem } from "../../viagem/entities/viagem.entity"
 
 @Entity({name:"tb_usuarios"})
 export class Usuario{
@@ -57,5 +58,7 @@ export class Usuario{
     @ApiProperty()
     avaliacao:number
 
-    // OneToMany(()=>Viagem, (viagem)=>viagem.usuario) viagem:Viagem[]
+    // Relacionamentos 
+    @OneToMany(() => Viagem, (viagem) => viagem.usuario) 
+    viagem: Viagem []
 }

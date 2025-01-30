@@ -2,7 +2,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Transform, TransformFnParams } from "class-transformer";
 import { IsBoolean, IsNotEmpty } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Viagem } from "../../viagem/entities/viagem.entity";
 
 @Entity({name: "tb_veiculo"})
 export class Veiculo{
@@ -39,5 +40,7 @@ export class Veiculo{
     @Column({ type: "boolean", default: true })
     disponivel: boolean;
 
-    // OneToMany viagens
+    // Relacionamentos 
+    @OneToMany(() => Viagem, (viagem) => viagem.veiculo)
+    viagem: Viagem[]
 }

@@ -1,6 +1,7 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
 import { UsuarioService } from "../services/usuario.service";
 import { Usuario } from "../entities/usuario.entity";
+import { Viagem } from "../../viagem/entities/viagem.entity";
 
 @Controller("/usuarios")
 export class UsuarioController{
@@ -30,4 +31,5 @@ export class UsuarioController{
     async update(@Body()usuario:Usuario):Promise<Usuario>{
         return this.usuarioService.update(usuario)
     }
+
 }

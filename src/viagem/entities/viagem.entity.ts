@@ -1,6 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { IsNotEmpty } from "class-validator"
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { Veiculo } from "../../veiculo/entities/veiculo.entity"
+import { Usuario } from "../../usuario/entities/usuario.entity"
 
 @Entity({name: "tb_viagens"})
 export class Viagem {
@@ -41,16 +43,17 @@ export class Viagem {
     @ApiProperty() 
     status: string
 
-    /** @ApiProperty({ type: () => Veiculo })  
+    // Relacionamentos 
+    @ApiProperty({ type: () => Veiculo })  
     @ManyToOne(() => Veiculo, (veiculo) => veiculo.viagem, {
         onDelete: "CASCADE"
     })
     veiculo: Veiculo
 
-     @ApiProperty({ type: () => Usuario })  
-   @ManyToOne(() => Usuario, (usuario) => usuario.viagem, {
-        onDelete: "CASCADE"
-    })
-    usuario: Usuario
-*/
+    @ApiProperty({ type: () => Usuario })  
+    @ManyToOne(() => Usuario, (usuario) => usuario.viagem, {
+            onDelete: "CASCADE"
+        })
+        usuario: Usuario
+
 }
