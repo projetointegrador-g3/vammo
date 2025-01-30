@@ -36,6 +36,9 @@ export class AuthService{
 
         const buscaUsuario = await this.usuarioService.findByUsuario(usuarioLogin.usuario)
 
+        if (!buscaUsuario)
+            throw new HttpException("⚠️ O Usuario já existe!", HttpStatus.BAD_REQUEST)
+        
         return{
             id: buscaUsuario.id,
             nome: buscaUsuario.nome,

@@ -54,7 +54,6 @@ export class Usuario{
     @Transform(({value})=>parseFloat(parseFloat(value).toFixed(2)))
     @Min(0)
     @Max(5)
-    @Column({nullable:false})
     @ApiProperty()
     avaliacao:number
 

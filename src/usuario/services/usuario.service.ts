@@ -4,6 +4,7 @@ import { Usuario } from "../entities/usuario.entity";
 import { privateDecrypt } from "crypto";
 import { NumericType, Repository } from "typeorm";
 import { differenceInYears } from "date-fns";
+import { Bcrypt } from "../../auth/bcrypt/bcrypt";
 
 @Injectable()
 export class UsuarioService{
@@ -13,7 +14,7 @@ export class UsuarioService{
         private usuarioRepository:Repository<Usuario>
     ){}
 
-    async findByUsuario(usuario:string):Promise<Usuario|null>{
+    async findByUsuario(usuario:string):Promise<Usuario | null>{
         return await this.usuarioRepository.findOne({
             where:{
                 usuario: usuario
@@ -61,6 +62,9 @@ export class UsuarioService{
 
         if (buscaUsuario)
             throw new HttpException("⚠️ O Usuario já existe!", HttpStatus.BAD_REQUEST)
+
+
+        //usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha)
         return await this.usuarioRepository.save(usuario)
     }
 

@@ -10,7 +10,7 @@ import { VeiculoModule } from '../veiculo/veiculo.module';
   imports: [TypeOrmModule.forFeature([Viagem]), VeiculoModule],
   providers: [ViagemService],
   controllers: [ViagemController],
-  exports: [],
+  exports: [TypeOrmModule],
 })
 
 export class ViagemModule { }
