@@ -57,7 +57,7 @@ export class UsuarioService{
         const idade=differenceInYears(dataAtual, dataNascimentoDate)
     
         if(idade<18)  
-        throw new HttpException("⚠️ Usuário deve ter pelo menos 18 anos", HttpStatus.NOT_FOUND) 
+             throw new HttpException("⚠️ Usuário deve ter pelo menos 18 anos", HttpStatus.NOT_FOUND) 
         
         const buscaUsuario=await this.findByUsuario(usuario.usuario)
 
