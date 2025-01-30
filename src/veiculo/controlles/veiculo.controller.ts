@@ -30,7 +30,7 @@ export class VeiculoController{
     /*
     @Get('/disponivel')  
     @HttpCode(HttpStatus.OK)  
-    async getVeiculoDisponivel(): Promise<{ modelo: string; placa: string; disponivel: boolean }[]> {  
+    async getVeiculoDisponivel(): Promise<any[]> {  
         return this.veiculoService.getVeiculoDisponivel();  
     }
     */

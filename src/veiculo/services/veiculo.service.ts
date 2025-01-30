@@ -64,7 +64,7 @@ export class VeiculoService{
     }
 
 /*
-     async getVeiculoDisponivel(): Promise<{modelo: string; placa: string; disponivel: boolean }[]> {  
+     async getVeiculoDisponivel(): Promise<any[]> {  
         const results = await this.veiculoRepository.createQueryBuilder('veiculo')   
             .where('veiculo.disponivel = :disponivel', { disponivel: true })  
             .select(['veiculo.modelo AS Veiculo', 'veiculo.placa AS Placa', 'veiculo.disponivel AS Disponivel'])  
