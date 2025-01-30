@@ -11,6 +11,7 @@ export class VeiculoService{
         private veiculoRepository: Repository<Veiculo>
     ){}
 
+
     async findAll(): Promise<Veiculo[]> {
         return await this.veiculoRepository.find({
             relations: {
@@ -75,7 +76,7 @@ export class VeiculoService{
         return await this.veiculoRepository.delete(id)
     }
 
-/*
+
      async getVeiculoDisponivel(): Promise<{modelo: string; placa: string; disponivel: boolean }[]> {  
         const results = await this.veiculoRepository.createQueryBuilder('veiculo')   
             .where('veiculo.disponivel = :disponivel', { disponivel: true })  
@@ -88,6 +89,6 @@ export class VeiculoService{
         return results;
     
     }  
-*/
+
 
 }

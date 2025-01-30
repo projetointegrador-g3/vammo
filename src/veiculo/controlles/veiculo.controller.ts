@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
 import { VeiculoService } from "../services/veiculo.service";
 import { Veiculo } from "../entities/veiculo.entity";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
@@ -32,13 +32,13 @@ export class VeiculoController{
         return this.veiculoService.findByModelo(modelo)
     }
 
-    /*
+    
     @Get('/disponivel')  
     @HttpCode(HttpStatus.OK)  
-    async getVeiculoDisponivel(): Promise<{ modelo: string; placa: string; disponivel: boolean }[]> {  
+    async getVeiculoDisponivel(): Promise<any[]> {  
         return this.veiculoService.getVeiculoDisponivel();  
     }
-    */
+    
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
@@ -46,13 +46,13 @@ export class VeiculoController{
         return this.veiculoService.create(produto)
     }
 
-    @Post()
+    @Put()
     @HttpCode(HttpStatus.OK)
     update(@Body() produto: Veiculo): Promise<Veiculo>{
         return this.veiculoService.update(produto)
     }
 
-    @Post()
+    @Delete('/:id')
     @HttpCode(HttpStatus.NO_CONTENT)
     delete(@Param('id', ParseIntPipe) id: number){
         return this.veiculoService.delete(id)
