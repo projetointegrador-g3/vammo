@@ -54,10 +54,10 @@ export class VeiculoService{
     }
 
     async create(veiculo: Veiculo): Promise<Veiculo>{
-
+        const placa = veiculo.placa;
         const ano = veiculo.data_fabricacao;
-        if (ano < '2020')
-            throw new HttpException('⚠️ Veiculo fora da data aceitável', HttpStatus.FORBIDDEN);
+        if (ano < '2020' || placa.length > 7 )
+            throw new HttpException('⚠️ Veiculo fora da data aceitável, e/ou Placa está errada 〰️', HttpStatus.FORBIDDEN);
 
         return await this.veiculoRepository.save(veiculo)
     }

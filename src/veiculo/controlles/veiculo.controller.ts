@@ -7,7 +7,7 @@ import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
 
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
-@ApiTags('Veículos')
+@ApiTags('Veiculos')
 @Controller('/veiculo')
 export class VeiculoController{
     constructor(
