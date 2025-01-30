@@ -4,7 +4,7 @@ import { Viagem } from "../entities/viagem.entity";
 import { ViagemService } from "../services/viagem.service";
 import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
 
-@ApiTags('Viagem')
+@ApiTags('Viagens')
 @UseGuards(JwtAuthGuard)
 @Controller("/viagens")
 @ApiBearerAuth()

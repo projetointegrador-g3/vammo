@@ -12,15 +12,23 @@ export class VeiculoService{
     ){}
 
     async findAll(): Promise<Veiculo[]> {
-        return await this.veiculoRepository.find({})
+        return await this.veiculoRepository.find({
+            relations: {
+                viagem: true,
+            }
+        })
     }
 
     async findByModelo(modelo: string): Promise<Veiculo[]>{
         const veiculo = await  this.veiculoRepository.find({
             where: {
                 modelo: ILike(`%${modelo}%`)
+            },
+            relations: {
+                viagem: true,
             }
         })
+
         if (veiculo.length === 0) {  
             throw new HttpException(`⚠️ Nenhum resultado encontrado com o ${modelo}`, HttpStatus.NOT_FOUND);
             }  
@@ -33,9 +41,13 @@ export class VeiculoService{
             where: {
                 id
             },
-        });
+            relations: {
+                viagem: true,
+            }
+        })
+
         if (!veiculo)
-            throw new HttpException('Veículo não encontrado!', HttpStatus.NOT_FOUND);
+            throw new HttpException('⚠️ Veículo não encontrado!', HttpStatus.NOT_FOUND);
 
         return veiculo;
     }
@@ -44,7 +56,7 @@ export class VeiculoService{
 
         const ano = veiculo.data_fabricacao;
         if (ano < '2020')
-            throw new HttpException('⚠️ veiculo fora da data aceitável', HttpStatus.FORBIDDEN);
+            throw new HttpException('⚠️ Veiculo fora da data aceitável', HttpStatus.FORBIDDEN);
 
         return await this.veiculoRepository.save(veiculo)
     }

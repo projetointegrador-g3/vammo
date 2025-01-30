@@ -15,24 +15,35 @@ export class UsuarioService{
 
     async findByUsuario(usuario:string):Promise<Usuario|null>{
         return await this.usuarioRepository.findOne({
-            where:{usuario:usuario}
+            where:{
+                usuario: usuario
+            },
+            relations:{
+                viagem: true,
+            }
         })
     }
 
     async findAll():Promise<Usuario[]>{
         return await this.usuarioRepository.find({
-            // relations:{}
+            relations:{
+                viagem: true,
+            }
         })
     }
 
     async findByID(id:number):Promise<Usuario>{
 
         const usuario=await this.usuarioRepository.findOne({
-            where:{id},
-            // relations:{}
+            where:{
+                id
+            },
+            relations:{
+                viagem: true,
+            }
         })
         if(!usuario)
-            throw new HttpException("Usuário não encontrado", HttpStatus.NOT_FOUND)
+            throw new HttpException("⚠️ Usuário não encontrado", HttpStatus.NOT_FOUND)
         return usuario
     }
 
@@ -59,7 +70,7 @@ export class UsuarioService{
         const buscaUsuario=await this.findByUsuario(usuario.usuario)
 
         if(buscaUsuario && buscaUsuario.id!==usuario.id)
-            throw new HttpException("Usuário já está cadastrado!", HttpStatus.BAD_REQUEST)
+            throw new HttpException("⚠️ Usuário já está cadastrado!", HttpStatus.BAD_REQUEST)
         await this.create(usuario)
         return await this.usuarioRepository.save(usuario)
     }

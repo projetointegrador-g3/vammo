@@ -2,21 +2,23 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { DeleteResult, ILike, Repository } from "typeorm";
 import { Viagem } from "../entities/viagem.entity";
+import { VeiculoService } from "../../veiculo/services/veiculo.service";
 
 @Injectable()
 export class ViagemService {
     constructor(
         @InjectRepository(Viagem)
         private viagemRepository: Repository<Viagem>,
-        //private veiculoService: VeiculoService
+        private veiculoService: VeiculoService
     ) { }
+
     async findAll(): Promise<Viagem[]> {
         return await this.viagemRepository.find({
-            /*relations: {
-                //veiculo: true,
+            relations: {
+                veiculo: true,
                 usuario: true
-            }*/
-        });
+            }
+        })
     }
 
     async findById(id: number): Promise<Viagem> {
@@ -24,13 +26,14 @@ export class ViagemService {
             where: {
                 id
             },
-            /*relations: {
-               veiculo: true,
+            relations: {
+                veiculo: true,
                 usuario: true
-            }*/
-        });
+            }
+        })
+
         if (!viagem)
-            throw new HttpException('Viagem não encontrada!', HttpStatus.NOT_FOUND);
+            throw new HttpException('⚠️ Viagem não encontrada!', HttpStatus.NOT_FOUND);
 
         return viagem;
     }
@@ -38,28 +41,32 @@ export class ViagemService {
     async findAllByTitulo(titulo: string): Promise<Viagem[]> {
         return await this.viagemRepository.find({
             where: {
-                //veiculo: ILike(`%${titulo}%`)
+                veiculo: ILike(`%${titulo}%`)
             },
-            /*relations: {
+            relations: {
                 veiculo: true,
                 usuario: true
-            }*/
-        });
+            }
+        })
     }
 
     async create(viagem: Viagem): Promise<Viagem> {
-        //await this.veiculoService.findById(viagem.veiculo.id);
+        await this.veiculoService.findById(viagem.veiculo.id);
         return await this.viagemRepository.save(viagem);
     }
 
     async update(viagem: Viagem): Promise<Viagem> {
+
         await this.findById(viagem.id);
-        //await this.veiculoService.findById(viagem.veiculo.id);
+        await this.veiculoService.findById(viagem.veiculo.id);
+
         return await this.viagemRepository.save(viagem);
     }
 
     async delete(id: number): Promise<DeleteResult> {
+
         await this.findById(id);
+
         return await this.viagemRepository.delete(id);
     }
 }

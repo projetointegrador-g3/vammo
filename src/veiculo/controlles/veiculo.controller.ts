@@ -1,8 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, UseGuards } from "@nestjs/common";
 import { VeiculoService } from "../services/veiculo.service";
 import { Veiculo } from "../entities/veiculo.entity";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
 
+@UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
+@ApiTags('Veículos')
 @Controller('/veiculo')
 export class VeiculoController{
     constructor(
