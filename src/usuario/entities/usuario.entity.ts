@@ -14,8 +14,7 @@ export class Usuario{
     @IsNotEmpty()
     @Column({length:255, nullable:false})
     @ApiProperty()
-    tipo:string
-    //Motorista ou usuário
+    tipo_user:string
 
     @IsNotEmpty()
     @Column({length:255, nullable:false})
