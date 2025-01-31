@@ -24,10 +24,6 @@ export class UsuarioController{
     findById(@Param('id', ParseIntPipe) id: number): Promise<Usuario>{
         return this.usuarioService.findByID(id)
     }
-<<<<<<< HEAD
- 
-    @Post('/cadastrar')
-=======
 
     @UseGuards(JwtAuthGuard)
     @Get("/genero/:genero")
@@ -37,7 +33,6 @@ export class UsuarioController{
     }
 
     @Post("/cadastrar")
->>>>>>> 387204148e74a30260dedfd7aabb54f2a395624d
     @HttpCode(HttpStatus.CREATED)
     async create(@Body() usuario: Usuario): Promise<Usuario>{
         return this.usuarioService.create(usuario)
