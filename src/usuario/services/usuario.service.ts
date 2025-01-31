@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Usuario } from "../entities/usuario.entity";
-import { NumericType, Repository } from "typeorm";
+import { ILike, NumericType, Repository } from "typeorm";
 import { differenceInYears } from "date-fns";
 import { Bcrypt } from "../../auth/bcrypt/bcrypt";
 
@@ -12,7 +12,7 @@ export class UsuarioService{
         @InjectRepository(Usuario)
         private usuarioRepository:Repository<Usuario>,
         private bcrypt: Bcrypt //Não esquecer
- 
+
     ){}
 
     async findByUsuario(usuario:string):Promise<Usuario | null>{
@@ -25,6 +25,13 @@ export class UsuarioService{
             }
         })
     }
+
+    async findByGenero(genero:string):Promise<Usuario[]>{
+        return this.usuarioRepository.find({
+            where:{genero:ILike(`%${genero}%`)}
+        })
+    }
+    
 
     async findAll():Promise<Usuario[]>{
         return await this.usuarioRepository.find({

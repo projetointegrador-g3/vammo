@@ -33,7 +33,12 @@ export class VeiculoController{
     }
 
     
+<<<<<<< HEAD:src/veiculo/controlles/veiculo.controller.ts
     @Get('/disponivel/:modelo')  
+=======
+    
+    @Get('/disponivel')  
+>>>>>>> 387204148e74a30260dedfd7aabb54f2a395624d:src/veiculo/controllers/veiculo.controller.ts
     @HttpCode(HttpStatus.OK)  
     async getVeiculoDisponivel(@Param('modelo') modelo: string): Promise<any[]> {  
         return this.veiculoService.getVeiculoDisponivel(modelo);  
