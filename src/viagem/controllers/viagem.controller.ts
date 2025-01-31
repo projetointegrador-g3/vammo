@@ -43,7 +43,7 @@ export class ViagemController {
 
 
   //Métodos Especiais
-  @Get('/origem/:origem')
+  @Get('origem/:origem')
   @HttpCode(HttpStatus.OK)
   findByTitulo(@Param('origem') origem: string): Promise<Viagem[]>{
     return this.viagemService.findAllByOrigem(origem)
