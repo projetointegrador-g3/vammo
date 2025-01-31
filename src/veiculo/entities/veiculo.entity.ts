@@ -28,7 +28,7 @@ export class Veiculo{
     @IsNotEmpty()
     @ApiProperty()
     @Column({length: 10, nullable: false})
-    data_fabricacao: string;
+    ano_fabricacao: string;
 
     @Transform(({ value }: TransformFnParams) => value?.trim())
     @ApiProperty()

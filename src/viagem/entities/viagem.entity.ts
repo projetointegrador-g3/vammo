@@ -1,8 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger"
-import { IsNotEmpty } from "class-validator"
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { IsNotEmpty, IsNumber, IsPositive } from "class-validator"
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 import { Veiculo } from "../../veiculo/entities/veiculo.entity"
 import { Usuario } from "../../usuario/entities/usuario.entity"
+import { NumericTransformer } from "../../util/numericTransformer"
 
 @Entity({name: "tb_viagens"})
 export class Viagem {
@@ -10,6 +11,11 @@ export class Viagem {
     @PrimaryGeneratedColumn() 
     @ApiProperty() 
     id: number
+
+    
+    @ApiProperty()  
+    @CreateDateColumn()
+    data_ida: Date;
 
     @IsNotEmpty()
     @Column({length: 255, nullable: false}) 
@@ -22,21 +28,24 @@ export class Viagem {
     destino: string
 
     @IsNotEmpty()
-    @Column({length: 255, nullable: false}) 
     @ApiProperty() 
-    distancia: string
+    @Column({ type: 'int' })  
+    distancia: number;
 
     @IsNotEmpty()
     @ApiProperty() 
+    @Column({ type: 'int' })  
+    velocidade: number;
+
+    @IsNumber({ maxDecimalPlaces: 2 })
+    @IsNotEmpty()
+    @IsPositive()
+    @Column({ type: "decimal", precision: 10, scale: 2, transformer: new NumericTransformer() })
     preco: number
-
-    @IsNotEmpty()
-    @ApiProperty() 
-    velocidade: number
-
-    @ApiProperty()  
-    @UpdateDateColumn()
-    data_ida: Date
+    
+    @ApiProperty()
+    @Column({length: 8, nullable: false})
+    duracao: string;
 
     @IsNotEmpty()
     @Column({length: 255, nullable: false }) 

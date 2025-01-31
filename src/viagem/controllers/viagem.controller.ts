@@ -46,8 +46,13 @@ export class ViagemController {
   @Get('/origem/:origem')
   @HttpCode(HttpStatus.OK)
   findByTitulo(@Param('origrm') origem: string): Promise<Viagem[]>{
-    return this.viagemService.findAllByTitulo(origem)
+    return this.viagemService.findAllByOrigem(origem)
   }
 
-  
+  @Get('historico/:usuario')  
+  @HttpCode(HttpStatus.OK)
+  findByHistorico(@Param('usuario') usuario: string): Promise<any> {  
+    return this.viagemService.findByHistorico(usuario);  
+  }
+
 }

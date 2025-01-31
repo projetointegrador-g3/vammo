@@ -69,7 +69,9 @@ export class UsuarioService{
         return await this.usuarioRepository.save(usuario)
     }
 
+ 
     async update(usuario:Usuario):Promise<Usuario>{
+       
         await this.findByID(usuario.id)
         
         const buscaUsuario=await this.findByUsuario(usuario.usuario)

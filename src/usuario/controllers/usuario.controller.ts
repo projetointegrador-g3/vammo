@@ -12,29 +12,29 @@ export class UsuarioController{
     constructor(private readonly usuarioService:UsuarioService){}
 
     @UseGuards(JwtAuthGuard)
-    @Get("/all")
+    @Get('/all')
     @HttpCode(HttpStatus.OK)
-    findAll():Promise<Usuario[]>{
-        return this.usuarioService.findAll()
+    findAll(): Promise<Usuario[]>{
+        return this.usuarioService.findAll();
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get("/:id")
+    @Get('/:id')
     @HttpCode(HttpStatus.OK)
-    findByID(@Param("id", ParseIntPipe)id:number):Promise<Usuario>{
+    findById(@Param('id', ParseIntPipe) id: number): Promise<Usuario>{
         return this.usuarioService.findByID(id)
     }
-
-    @Post("/cadastrar")
+ 
+    @Post('/cadastrar')
     @HttpCode(HttpStatus.CREATED)
-    async create(@Body()usuario:Usuario):Promise<Usuario>{
+    async create(@Body() usuario: Usuario): Promise<Usuario>{
         return this.usuarioService.create(usuario)
     }
-
+ 
     @UseGuards(JwtAuthGuard)
-    @Put("/atualizar")
+    @Put('/atualizar')
     @HttpCode(HttpStatus.OK)
-    async update(@Body()usuario:Usuario):Promise<Usuario>{
+    async update(@Body() usuario: Usuario): Promise<Usuario>{
         return this.usuarioService.update(usuario)
     }
 }

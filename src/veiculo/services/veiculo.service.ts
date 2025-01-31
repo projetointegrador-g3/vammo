@@ -54,10 +54,12 @@ export class VeiculoService{
     }
 
     async create(veiculo: Veiculo): Promise<Veiculo>{
+
         const placa = veiculo.placa;
-        const ano = veiculo.data_fabricacao;
-        if (ano < '2020' || placa.length > 7 )
+        const ano = veiculo.ano_fabricacao;
+        if (ano < '2020' || placa.length > 7)
             throw new HttpException('⚠️ Veiculo fora da data aceitável, e/ou Placa está errada 〰️', HttpStatus.FORBIDDEN);
+
 
         return await this.veiculoRepository.save(veiculo)
     }
@@ -77,10 +79,16 @@ export class VeiculoService{
     }
 
 
-     async getVeiculoDisponivel(): Promise<{modelo: string; placa: string; disponivel: boolean }[]> {  
-        const results = await this.veiculoRepository.createQueryBuilder('veiculo')   
-            .where('veiculo.disponivel = :disponivel', { disponivel: true })  
-            .select(['veiculo.modelo AS Veiculo', 'veiculo.placa AS Placa', 'veiculo.disponivel AS Disponivel'])  
+     async getVeiculoDisponivel(modelo: string): Promise<any[]> {  
+        const results = await this.veiculoRepository.createQueryBuilder('veiculo')  
+            .innerJoin('veiculo.viagem', 'viagem') 
+            .where('veiculo.modelo LIKE :modelo', { modelo: `%${modelo}%` })  
+            .select([
+                    'veiculo.disponivel',
+                    'veiculo.modelo AS Veiculo', 
+                    'veiculo.placa AS Placa',
+                    'veiculo.ano_fabricacao AS Ano'
+                       ])  
             .getRawMany();  
     
         if (results.length === 0) {  
