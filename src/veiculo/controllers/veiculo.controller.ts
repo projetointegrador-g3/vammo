@@ -33,6 +33,7 @@ export class VeiculoController{
     }
 
     
+    
     @Get('/disponivel')  
     @HttpCode(HttpStatus.OK)  
     async getVeiculoDisponivel(): Promise<any[]> {  

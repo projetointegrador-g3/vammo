@@ -3,6 +3,7 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Veiculo } from "../entities/veiculo.entity";
 import { DeleteResult, ILike, Repository } from "typeorm";
+import { Usuario } from "../../usuario/entities/usuario.entity";
 
 @Injectable()
 export class VeiculoService{
@@ -77,7 +78,7 @@ export class VeiculoService{
     }
 
 
-     async getVeiculoDisponivel(): Promise<{modelo: string; placa: string; disponivel: boolean }[]> {  
+    async getVeiculoDisponivel(): Promise<{modelo: string; placa: string; disponivel: boolean }[]> {  
         const results = await this.veiculoRepository.createQueryBuilder('veiculo')   
             .where('veiculo.disponivel = :disponivel', { disponivel: true })  
             .select(['veiculo.modelo AS Veiculo', 'veiculo.placa AS Placa', 'veiculo.disponivel AS Disponivel'])  

@@ -25,6 +25,13 @@ export class UsuarioController{
         return this.usuarioService.findByID(id)
     }
 
+    @UseGuards(JwtAuthGuard)
+    @Get("/genero/:genero")
+    @HttpCode(HttpStatus.OK)
+    findByGenero(@Param("genero")genero:string):Promise<Usuario[]>{
+        return this.usuarioService.findByGenero(genero)
+    }
+
     @Post("/cadastrar")
     @HttpCode(HttpStatus.CREATED)
     async create(@Body()usuario:Usuario):Promise<Usuario>{
