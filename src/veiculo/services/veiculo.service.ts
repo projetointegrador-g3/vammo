@@ -87,7 +87,7 @@ export class VeiculoService{
     async getVeiculoDisponivel(modelo: string): Promise<Veiculo[]> {  
         const results = await this.veiculoRepository.createQueryBuilder('veiculo')  
             .innerJoin('veiculo.viagem', 'viagem')  
-            .where('veiculo.modelo LIKE :modelo', { modelo: `%${modelo}%` })  
+            .where('veiculo.modelo ILike :modelo', { modelo: `%${modelo}%` })  
             .select([  
                 'veiculo.disponivel',  
                 'veiculo.modelo AS Veiculo',  
