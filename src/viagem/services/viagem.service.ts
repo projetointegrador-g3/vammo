@@ -86,7 +86,7 @@ export class ViagemService {
   //**Métodos especiais  */
 
   //Historico completo
-  async findByHistorico(nome: string): Promise<any> {
+  async findByHistorico(nome: string): Promise<any[]> {
     const hist = await this.viagemRepository
       .createQueryBuilder('viagens')
       .innerJoin('viagens.veiculo', 'veiculo')
@@ -107,10 +107,10 @@ export class ViagemService {
         HttpStatus.FORBIDDEN,
       );
 
-    return {
+    return hist/*{
       Mensage: 'Historico da Viagem 🧳',
       Resultado: hist,
-    };
+    };*/
   }
 
 
