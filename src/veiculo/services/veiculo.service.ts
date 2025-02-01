@@ -101,15 +101,12 @@ export class VeiculoService{
             }  
         
             // Mapeando os resultados, adicione logs aqui  
-            const formattedResults = results.map(item => {  
-
-                return {  
-                    Disponivel: item.veiculo_disponivel === 1 ? 'disponível' : 'não disponível',  // para não retorna 1 ou 0
-                    Veiculo: item.modelo,  
-                    Placa: item.placa,  
-                    Ano: item.ano_fabricacao, 
-                };  
-            });  
+            const formattedResults = results.map(item => ({  
+                Disponivel: item.veiculo_disponivel === 1 ? 'disponível' : 'não disponível',   
+                Veiculo: item.modelo,  
+                Placa: item.placa,  
+                Ano: item.ano_fabricacao,  
+            }));
 
             return {
                 Mensagem: "Verifique se o Carro está Disponivel! ",
