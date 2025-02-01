@@ -13,7 +13,7 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
-      useClass: DevService, 
+      useClass: ProdService, 
       imports: [ConfigModule],
     }),
     ViagemModule,
