@@ -84,7 +84,7 @@ export class VeiculoService{
     }
 
 
-    async getVeiculoDisponivel(modelo: string): Promise<any> {  
+    async getVeiculoDisponivel(modelo: string): Promise<Veiculo[]> {  
         const results = await this.veiculoRepository.createQueryBuilder('veiculo')  
             .innerJoin('veiculo.viagem', 'viagem')  
             .where('veiculo.modelo LIKE :modelo', { modelo: `%${modelo}%` })  
@@ -99,19 +99,9 @@ export class VeiculoService{
             if (results.length === 0) {  
                 throw new HttpException('Nenhum veículo disponível encontrado.', HttpStatus.NOT_FOUND);  
             }  
-        
-            // Mapeando os resultados, adicione logs aqui  
-            const formattedResults = results.map(item => ({  
-                Disponivel: item.veiculo_disponivel === 1 ? 'disponível' : 'não disponível',   
-                Veiculo: item.modelo,  
-                Placa: item.placa,  
-                Ano: item.ano_fabricacao,  
-            }));
+       
 
-            return {
-                Mensagem: "Verifique se o Carro está Disponivel! ",
-                Carros: formattedResults};  
-        }  
-
+            return results
+        }
 //****** */
 }
