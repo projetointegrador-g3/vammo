@@ -35,7 +35,7 @@ export class VeiculoController{
     
     @Get('/disponivel/:modelo')
     @HttpCode(HttpStatus.OK)
-    async getVeiculoDisponivel(@Param('modelo') modelo: string): Promise<{ mensagem: string; carros: Veiculo[] }>  {
+    async getVeiculoDisponivel(@Param('modelo') modelo: string): Promise<any[]> {
         return this.veiculoService.getVeiculoDisponivel(modelo);
     }
     
