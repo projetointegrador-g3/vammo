@@ -44,4 +44,12 @@ export class UsuarioController{
     async update(@Body() usuario: Usuario): Promise<Usuario>{
         return this.usuarioService.update(usuario)
     }
+
+    @UseGuards(JwtAuthGuard)
+    @Get('/email/:usuario')
+    @HttpCode(HttpStatus.OK)
+    findByEmail(@Param('usuario') usuario:string): Promise<Usuario | null>{
+        return this.usuarioService.findByUsuario(usuario);
+    }
+    
 }
