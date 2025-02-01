@@ -91,7 +91,7 @@ export class ViagemService {
       .createQueryBuilder('viagens')
       .innerJoin('viagens.veiculo', 'veiculo')
       .innerJoin('viagens.usuario', 'usuario')
-      .where('usuario.nome LIKE :nome', { nome: `%${nome}%` })
+      .where('usuario.nome ILike :nome', { nome: `%${nome}%` })
       .select([
         'usuario.nome As Nome',
         'viagens.origem As Origem',
