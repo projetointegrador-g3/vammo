@@ -86,7 +86,7 @@ export class ViagemService {
   //**Métodos especiais  */
 
   //Historico completo
-  async findByHistorico(nome: string): Promise<any[]> {
+  async findByHistorico(nome: string): Promise<any> {
     const hist = await this.viagemRepository
       .createQueryBuilder('viagens')
       .innerJoin('viagens.veiculo', 'veiculo')
@@ -104,7 +104,7 @@ export class ViagemService {
     if (!hist || hist.length === 0)
       throw new HttpException(
         '⛔ Usuario(s) não localizada!',
-        HttpStatus.FORBIDDEN,
+        HttpStatus.NOT_FOUND,
       );
 
     return hist/*{
