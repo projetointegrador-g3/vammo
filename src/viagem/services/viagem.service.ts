@@ -86,12 +86,12 @@ export class ViagemService {
   //**Métodos especiais  */
 
   //Historico completo
-  async findByHistorico(usuario: string): Promise<any> {
+  async findByHistorico(nome: string): Promise<any> {
     const hist = await this.viagemRepository
       .createQueryBuilder('viagens')
       .innerJoin('viagens.veiculo', 'veiculo')
       .innerJoin('viagens.usuario', 'usuario')
-      .where('usuario.nome LIKE :usuario', { usuario: `%${usuario}%` })
+      .where('usuario.nome LIKE :nome', { nome: `%${nome}%` })
       .select([
         'usuario.nome As Nome',
         'viagens.origem As Origem',
