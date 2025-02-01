@@ -46,7 +46,7 @@ export class ViagemService {
   async findAllByOrigem(origem: string): Promise<Viagem[]> {
     return await this.viagemRepository.find({
       where: {
-        veiculo: ILike(`%${origem}%`),
+        origem: ILike(`%${origem}%`),
       },
       relations: {
         veiculo: true,

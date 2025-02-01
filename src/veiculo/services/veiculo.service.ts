@@ -4,12 +4,14 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Veiculo } from "../entities/veiculo.entity";
 import { DeleteResult, ILike, Repository } from "typeorm";
 import { Usuario } from "../../usuario/entities/usuario.entity";
+import { ViagemService } from "../../viagem/services/viagem.service";
 
 @Injectable()
 export class VeiculoService{
     constructor(
         @InjectRepository(Veiculo)
-        private veiculoRepository: Repository<Veiculo>
+        private veiculoRepository: Repository<Veiculo>,
+    
     ){}
 
 
@@ -68,6 +70,8 @@ export class VeiculoService{
     async update(veiculo: Veiculo): Promise<Veiculo>{
 
         await this.findById(veiculo.id)
+
+        //await this.viagemRepository.findById(viagem.id)
 
         return await this.veiculoRepository.save(veiculo)
     }

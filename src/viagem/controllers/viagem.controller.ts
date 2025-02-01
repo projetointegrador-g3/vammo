@@ -49,7 +49,7 @@ export class ViagemController {
     return this.viagemService.findAllByOrigem(origem)
   }
 
-  @Get('historico/:usuario')  
+  @Get('/historico/:usuario')  
   @HttpCode(HttpStatus.OK)
   findByHistorico(@Param('usuario') usuario: string): Promise<any> {  
     return this.viagemService.findByHistorico(usuario);  
