@@ -86,10 +86,10 @@ export class UsuarioService{
 
         if(buscaUsuario && buscaUsuario.id!==usuario.id)
             throw new HttpException("⚠️ Usuário já está cadastrado!", HttpStatus.BAD_REQUEST)
-       // await this.create(usuario)
+        await this.create(usuario)
         return await this.usuarioRepository.save(usuario)
     }
-    
+
 
     //Método Extra para verificar a idade do usuário
     async calculoIdade(usuario: Usuario): Promise<Usuario>{
