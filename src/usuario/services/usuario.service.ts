@@ -63,7 +63,10 @@ export class UsuarioService{
     }
 
     async create(usuario:Usuario):Promise<Usuario>{
-        
+
+       //utilizando método para calcular a idade 
+        await this.calculoIdade(usuario)
+
         const buscaUsuario=await this.findByUsuario(usuario.usuario)
 
         if (buscaUsuario)
@@ -86,6 +89,7 @@ export class UsuarioService{
        // await this.create(usuario)
         return await this.usuarioRepository.save(usuario)
     }
+    
 
     //Método Extra para verificar a idade do usuário
     async calculoIdade(usuario: Usuario): Promise<Usuario>{
