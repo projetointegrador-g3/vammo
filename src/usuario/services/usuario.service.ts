@@ -63,14 +63,6 @@ export class UsuarioService{
     }
 
     async create(usuario:Usuario):Promise<Usuario>{
-        const dataNascimento=usuario.data_aniversario
-        const [dia, mes, ano]=dataNascimento.split('/').map(Number)  
-        const dataNascimentoDate=new Date(ano, mes-1, dia)
-        const dataAtual=new Date()
-        const idade=differenceInYears(dataAtual, dataNascimentoDate)
-    
-        if(idade<18)  
-             throw new HttpException("⚠️ Usuário deve ter pelo menos 18 anos", HttpStatus.NOT_FOUND) 
         
         const buscaUsuario=await this.findByUsuario(usuario.usuario)
 
@@ -91,7 +83,21 @@ export class UsuarioService{
 
         if(buscaUsuario && buscaUsuario.id!==usuario.id)
             throw new HttpException("⚠️ Usuário já está cadastrado!", HttpStatus.BAD_REQUEST)
-        await this.create(usuario)
+       // await this.create(usuario)
         return await this.usuarioRepository.save(usuario)
+    }
+
+    //Método Extra para verificar a idade do usuário
+    async calculoIdade(usuario: Usuario): Promise<Usuario>{
+        const dataNascimento=usuario.data_aniversario
+        const [dia, mes, ano]=dataNascimento.split('/').map(Number)  
+        const dataNascimentoDate=new Date(ano, mes-1, dia)
+        const dataAtual=new Date()
+        const idade=differenceInYears(dataAtual, dataNascimentoDate)
+    
+        if(idade<18)  
+             throw new HttpException("⚠️ Usuário deve ter pelo menos 18 anos", HttpStatus.NOT_FOUND) 
+    
+        return usuario;
     }
 }
