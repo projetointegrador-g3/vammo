@@ -61,9 +61,6 @@ export class ViagemService {
 
     //Formata Hora
     viagem.duracao = this.formatarDuracaoEmTempo(tempoViagem);
-
-    // Verificação e formatação da data
-   /// const novaData = new Date(viagem.data_ida);
     
     await this.veiculoService.findById(viagem.veiculo.id);
 
@@ -107,10 +104,10 @@ export class ViagemService {
         HttpStatus.NOT_FOUND,
       );
 
-    return hist/*{
+    return {
       Mensage: 'Historico da Viagem 🧳',
       Resultado: hist,
-    };*/
+    };
   }
 
 

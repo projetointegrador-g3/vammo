@@ -31,6 +31,12 @@ export class UsuarioService{
             where:{genero:ILike(`%${genero}%`)}
         })
     }
+
+    async findByEmail(email:string):Promise<Usuario[]>{
+        return this.usuarioRepository.find({
+            where:{usuario:ILike(`%${email}%`)}
+        })
+    }
     
 
     async findAll():Promise<Usuario[]>{

@@ -48,8 +48,8 @@ export class UsuarioController{
     @UseGuards(JwtAuthGuard)
     @Get('/email/:usuario')
     @HttpCode(HttpStatus.OK)
-    findByEmail(@Param('usuario') usuario:string): Promise<Usuario | null>{
-        return this.usuarioService.findByUsuario(usuario);
+    findByEmail(@Param('usuario') usuario:string): Promise<Usuario[]>{
+        return this.usuarioService.findByEmail(usuario);
     }
     
 }
