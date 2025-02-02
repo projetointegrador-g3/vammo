@@ -86,7 +86,7 @@ export class UsuarioService{
 
         if(buscaUsuario && buscaUsuario.id!==usuario.id)
             throw new HttpException("⚠️ Usuário já está cadastrado!", HttpStatus.BAD_REQUEST)
-        await this.create(usuario)
+        await this.calculoIdade(usuario)
         return await this.usuarioRepository.save(usuario)
     }
 
