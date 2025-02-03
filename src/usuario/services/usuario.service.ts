@@ -86,7 +86,10 @@ export class UsuarioService{
 
         if(buscaUsuario && buscaUsuario.id!==usuario.id)
             throw new HttpException("⚠️ Usuário já está cadastrado!", HttpStatus.BAD_REQUEST)
+        
         await this.calculoIdade(usuario)
+
+        usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha)
         return await this.usuarioRepository.save(usuario)
     }
 
