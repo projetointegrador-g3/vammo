@@ -24,6 +24,11 @@ export class Veiculo{
     @Column({length: 7, nullable: false})
     placa: string;
 
+    @IsNotEmpty()
+    @ApiProperty()
+    @Column({length: 30, nullable: false})
+    cor: string;
+
     @Transform(({ value }: TransformFnParams) => value?.trim())
     @IsNotEmpty()
     @ApiProperty()
