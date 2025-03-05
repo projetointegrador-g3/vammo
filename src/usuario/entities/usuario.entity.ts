@@ -12,7 +12,7 @@ export class Usuario{
     id:number
 
     @IsNotEmpty()
-    @Column({length:255, nullable:false})
+    @Column({length:255})
     @ApiProperty()
     tipo_user:string
 
@@ -28,7 +28,7 @@ export class Usuario{
     data_aniversario:string
 
     @IsNotEmpty()
-    @Column({length:255, nullable:false})
+    @Column({length:255})
     @ApiProperty()
     genero:string
 
