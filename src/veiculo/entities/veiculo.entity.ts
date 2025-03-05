@@ -41,6 +41,7 @@ export class Veiculo{
     disponivel: boolean;
 
     // Relacionamentos 
+    @ApiProperty()
     @OneToMany(() => Viagem, (viagem) => viagem.veiculo)
     viagem: Viagem[]
 }
