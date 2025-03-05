@@ -57,6 +57,7 @@ export class Usuario{
     avaliacao:number
 
     // Relacionamentos 
+    @ApiProperty() 
     @OneToMany(() => Viagem, (viagem) => viagem.usuario) 
     viagem: Viagem []
 }
