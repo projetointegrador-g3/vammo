@@ -40,6 +40,7 @@ export class Viagem {
     @IsNumber({ maxDecimalPlaces: 2 })
     @IsNotEmpty()
     @IsPositive()
+    @ApiProperty() 
     @Column({ type: "decimal", precision: 10, scale: 2, transformer: new NumericTransformer() })
     preco: number
     
