@@ -12,7 +12,7 @@ export class Usuario{
     id:number
 
     @IsNotEmpty()
-    @Column({length:255})
+    @Column({length:255, nullable:false})
     @ApiProperty()
     tipo_user:string
 
