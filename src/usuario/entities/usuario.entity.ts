@@ -11,9 +11,10 @@ export class Usuario{
     @ApiProperty()
     id:number
 
-    @IsNotEmpty()
-    @Column({length:255})
+ 
+    @Column({length:255, nullable: true})
     @ApiProperty()
+    @IsOptional()
     tipo_user:string
 
     @IsNotEmpty()
@@ -27,9 +28,9 @@ export class Usuario{
     @ApiProperty()
     data_aniversario:string
 
-    @IsNotEmpty()
-    @Column({length:255})
+    @Column({length:255, nullable: true})
     @ApiProperty()
+    @IsOptional()
     genero:string
 
     @IsNotEmpty()
@@ -45,15 +46,18 @@ export class Usuario{
     @ApiProperty()
     senha:string
 
-    @Column({length:5000})
+    @Column({length:5000, nullable: true})
     @ApiProperty()
+    @IsOptional()
     foto:string
 
-    @IsNotEmpty()
+  
     @Transform(({value})=>parseFloat(parseFloat(value).toFixed(2)))
     @Min(0)
     @Max(5)
     @ApiProperty()
+    @IsOptional() // Validação opcional  
+    @Column({ nullable: true })
     avaliacao:number
 
     // Relacionamentos 
