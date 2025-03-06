@@ -14,7 +14,6 @@ export class Usuario{
  
     @Column({length:255, nullable: true})
     @ApiProperty()
-    @IsOptional()
     tipo_user:string
 
     @IsNotEmpty()
@@ -30,7 +29,6 @@ export class Usuario{
 
     @Column({length:255, nullable: true})
     @ApiProperty()
-    @IsOptional()
     genero:string
 
     @IsNotEmpty()
@@ -48,7 +46,6 @@ export class Usuario{
 
     @Column({length:5000, nullable: true})
     @ApiProperty()
-    @IsOptional()
     foto:string
 
   
@@ -56,7 +53,6 @@ export class Usuario{
     @Min(0)
     @Max(5)
     @ApiProperty()
-    @IsOptional() // Validação opcional  
     @Column({ nullable: true })
     avaliacao:number
 
