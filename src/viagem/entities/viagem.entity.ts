@@ -45,7 +45,7 @@ export class Viagem {
     preco: number
     
     @ApiProperty()
-    @Column({length: 8, nullable: false})
+    @Column({length: 10, nullable: true})
     duracao: string;
 
     @IsNotEmpty()
