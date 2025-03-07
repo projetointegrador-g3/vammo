@@ -43,7 +43,7 @@ export class Veiculo{
     @IsBoolean()
     @ApiProperty({ description: "Indica se o veículo está disponivel para viagem", default: true })
     @Column({ type: "boolean", default: true, nullable: true})
-    disponivel: boolean;
+    disponivel: boolean | null;
 
     // Relacionamentos 
     @ApiProperty()
