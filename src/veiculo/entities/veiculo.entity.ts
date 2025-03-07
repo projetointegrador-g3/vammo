@@ -35,6 +35,10 @@ export class Veiculo{
     @Column({length: 10, nullable: false})
     ano_fabricacao: string;
 
+    @Column({length:5000, nullable: true})
+    @ApiProperty()
+    foto:string
+
     @Transform(({ value }: TransformFnParams) => value?.trim())
     @ApiProperty()
     @Column({length: 5000, nullable: false})
