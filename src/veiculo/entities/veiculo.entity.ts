@@ -40,10 +40,10 @@ export class Veiculo{
     @Column({length: 5000, nullable: false})
     observacao: string;
 
-    @IsNotEmpty()
-    @ApiProperty()
-    @Column({length: 30, nullable: false})
-    disponivel: string;
+    @IsBoolean()
+    @ApiProperty({ description: "Indica se o veículo está disponivel para viagem", default: true })
+    @Column({ type: "boolean", default: true, nullable: true})
+    disponivel: boolean;
 
     // Relacionamentos 
     @ApiProperty()
