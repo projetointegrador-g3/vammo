@@ -97,40 +97,40 @@ export class UsuarioService{
         return await this.usuarioRepository.save(usuario)
     }
 
-    // Métodos para Google Login API
-    async validateGoogleToken(token: string): Promise<any> {
-        try {
-            const ticket = await this.client.verifyIdToken({
-                idToken: token,
-                audience: process.env.VITE_GOOGLE_CLIENT_ID,
-            });
-            const payload = ticket.getPayload();
-            return payload;
-        } catch (error) {
-            console.error('Erro ao verificar token do Google:', error);
-            throw new HttpException('Token do Google inválido ', HttpStatus.UNAUTHORIZED);
-        }
-    }
+    // // Métodos para Google Login API
+    // async validateGoogleToken(token: string): Promise<any> {
+    //     try {
+    //         const ticket = await this.client.verifyIdToken({
+    //             idToken: token,
+    //             audience: process.env.VITE_GOOGLE_CLIENT_ID,
+    //         });
+    //         const payload = ticket.getPayload();
+    //         return payload;
+    //     } catch (error) {
+    //         console.error('Erro ao verificar token do Google:', error);
+    //         throw new HttpException('Token do Google inválido ', HttpStatus.UNAUTHORIZED);
+    //     }
+    // }
 
-    async findOrCreateFromGoogle(payload: any): Promise<Usuario> {
-        let usuario = await this.findByUsuario(payload.email);
+    // async findOrCreateFromGoogle(payload: any): Promise<Usuario> {
+    //     let usuario = await this.findByUsuario(payload.email);
 
-        if (!usuario) {
-            usuario = new Usuario();
-            usuario.nome = payload.name;
-            usuario.usuario = payload.email;
-            usuario.foto = payload.picture;
+    //     if (!usuario) {
+    //         usuario = new Usuario();
+    //         usuario.nome = payload.name;
+    //         usuario.usuario = payload.email;
+    //         usuario.foto = payload.picture;
 
-            // Adicionando outros campos, se disponíveis no payload
-            usuario.tipo_user = payload.typeuser || "";
-            usuario.data_aniversario = payload.birthday || "";
-            usuario.genero = payload.gender || "";
-            usuario.avaliacao = payload.rating || 0;
-            return await this.usuarioRepository.save(usuario);
-        }
+    //         // Adicionando outros campos, se disponíveis no payload
+    //         usuario.tipo_user = payload.typeuser || "";
+    //         usuario.data_aniversario = payload.birthday || "";
+    //         usuario.genero = payload.gender || "";
+    //         usuario.avaliacao = payload.rating || 0;
+    //         return await this.usuarioRepository.save(usuario);
+    //     }
 
-        return usuario;
-    }
+    //     return usuario;
+    // }
 
 
     //Método Extra para verificar a idade do usuário

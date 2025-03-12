@@ -57,8 +57,8 @@ export class Usuario{
     avaliacao:number
 
     // Se usuário foi autenticado pelo Google
-    @Column({ default: 'local' }) 
-    provider: string;
+    // @Column({ default: 'local' }) 
+    // provider: string;
 
     // Relacionamentos 
     @ApiProperty() 
