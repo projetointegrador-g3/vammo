@@ -56,6 +56,10 @@ export class Usuario{
     @Column({ nullable: true })
     avaliacao:number
 
+    // Se usuário foi autenticado pelo Google
+    @Column({ default: 'local' }) 
+    provider: string;
+
     // Relacionamentos 
     @ApiProperty() 
     @OneToMany(() => Viagem, (viagem) => viagem.usuario) 

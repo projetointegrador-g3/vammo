@@ -52,7 +52,7 @@ export class UsuarioController{
         return this.usuarioService.findByEmail(usuario);
     }
 
-    @Get('/usuarios/googlelogin')
+    @Get('googlelogin')
     async googleLogin(@Headers('Authorization') authHeader: string) {
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
             throw new HttpException('Token não fornecido', HttpStatus.UNAUTHORIZED);
