@@ -120,6 +120,12 @@ export class UsuarioService{
             usuario.nome = payload.name;
             usuario.usuario = payload.email;
             usuario.foto = payload.picture;
+
+            // Adicionando outros campos, se disponíveis no payload
+            usuario.tipo_user = payload.typeuser || "";
+            usuario.data_aniversario = payload.birthday || "";
+            usuario.genero = payload.gender || "";
+            usuario.avaliacao = payload.rating || 0;
             return await this.usuarioRepository.save(usuario);
         }
 
