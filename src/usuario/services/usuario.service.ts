@@ -4,16 +4,20 @@ import { Usuario } from "../entities/usuario.entity";
 import { ILike, NumericType, Repository } from "typeorm";
 import { differenceInYears } from "date-fns";
 import { Bcrypt } from "../../auth/bcrypt/bcrypt";
+import { OAuth2Client } from "google-auth-library";
 
 @Injectable()
 export class UsuarioService{
 
+    private readonly client: OAuth2Client; 
+
     constructor(
         @InjectRepository(Usuario)
-        private usuarioRepository:Repository<Usuario>,
-        private bcrypt: Bcrypt //Não esquecer
-
-    ){}
+        private usuarioRepository: Repository<Usuario>,
+        private bcrypt: Bcrypt // Não esquecer
+    ) {
+        this.client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID); // Inicializa o cliente
+    }
 
     async findByUsuario(usuario:string):Promise<Usuario | null>{
         return await this.usuarioRepository.findOne({
@@ -91,6 +95,35 @@ export class UsuarioService{
 
         usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha)
         return await this.usuarioRepository.save(usuario)
+    }
+
+    // Métodos para Google Login API
+    async validateGoogleToken(token: string): Promise<any> {
+        try {
+            const ticket = await this.client.verifyIdToken({
+                idToken: token,
+                audience: process.env.GOOGLE_CLIENT_ID,
+            });
+            const payload = ticket.getPayload();
+            return payload;
+        } catch (error) {
+            console.error('Erro ao verificar token do Google:', error);
+            throw new HttpException('Token do Google inválido ', HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    async findOrCreateFromGoogle(payload: any): Promise<Usuario> {
+        let usuario = await this.findByUsuario(payload.email);
+
+        if (!usuario) {
+            usuario = new Usuario();
+            usuario.nome = payload.name;
+            usuario.usuario = payload.email;
+            usuario.foto = payload.picture;
+            return await this.usuarioRepository.save(usuario);
+        }
+
+        return usuario;
     }
 
 

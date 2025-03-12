@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpException, HttpStatus, Headers, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
 import { UsuarioService } from "../services/usuario.service";
 import { Usuario } from "../entities/usuario.entity";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
@@ -50,6 +50,22 @@ export class UsuarioController{
     @HttpCode(HttpStatus.OK)
     findByEmail(@Param('usuario') usuario:string): Promise<Usuario[]>{
         return this.usuarioService.findByEmail(usuario);
+    }
+
+    @Get('/usuarios/googlelogin')
+    async googleLogin(@Headers('Authorization') authHeader: string) {
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            throw new HttpException('Token não fornecido', HttpStatus.UNAUTHORIZED);
+        }
+
+        const token = authHeader.split(' ')[1];
+        try {
+            const payload = await this.usuarioService.validateGoogleToken(token);
+            const usuario = await this.usuarioService.findOrCreateFromGoogle(payload);
+            return usuario;
+        } catch (error) {
+            throw error;
+        }
     }
     
 }
