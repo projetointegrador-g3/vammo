@@ -19,7 +19,7 @@ export class AuthController {
     }
 
     // Login com Google
-    @Post('google')
+    @Post('/login')
     async googleLogin(@Body('token') token: string) {
         return this.authService.loginWithGoogle(token);
     }
