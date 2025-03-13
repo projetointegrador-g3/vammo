@@ -59,7 +59,7 @@ export class AuthService{
         try {
             const ticket = await client.verifyIdToken({
                 idToken: token,
-                audience: process.env.GOOGLE_CLIENT_ID,
+                audience: process.env.VITE_GOOGLE_CLIENT_ID,
             });
 
             const payload = ticket.getPayload();
@@ -67,16 +67,29 @@ export class AuthService{
                 throw new HttpException('Falha na autenticação com Google', HttpStatus.UNAUTHORIZED);
             }
 
-            const { email, name, picture } = payload;
+            // Garantir que os valores não sejam undefined
+            const email = payload.email ?? ''; // Se for undefined, vira string vazia
+            const name = payload.name ?? 'Usuário Google'; // Nome padrão se não vier
+            const picture = payload.picture ?? 'https://example.com/default-avatar.png'; // Foto padrão
+
+            if (!email) {
+                throw new HttpException('Email não encontrado no Google', HttpStatus.BAD_REQUEST);
+            }
 
             let usuario = await this.usuarioService.findByUsuario(email);
 
             if (!usuario) {
                 usuario = await this.usuarioService.create({
+                    id: 0,                    
                     nome: name,
                     usuario: email,
-                    senha: '', // Google não exige senha
-                    foto: picture
+                    senha: '',  // Google não exige senha
+                    foto: picture,
+                    tipo_user: 'comum', // Definindo o tipo_user como 'google' (valor padrão)
+                    data_aniversario: null, // Definindo null para o aniversário
+                    genero: '', // Definindo uma string vazia para o gênero
+                    avaliacao: 0,  
+                    viagem: [], 
                 });
             }
 

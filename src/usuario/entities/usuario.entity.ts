@@ -10,7 +10,6 @@ export class Usuario{
     @PrimaryGeneratedColumn()
     @ApiProperty()
     id:number
-
  
     @Column({length:255, nullable: true})
     @ApiProperty()
@@ -23,9 +22,9 @@ export class Usuario{
 
     @IsNotEmpty()
     @Transform(({value}:TransformFnParams)=>value?.trim())
-    @Column({length:10, nullable:false})
+    @Column({length:10, nullable:true})
     @ApiProperty()
-    data_aniversario:string
+    data_aniversario: string | null
 
     @Column({length:255, nullable: true})
     @ApiProperty()
@@ -55,10 +54,6 @@ export class Usuario{
     @ApiProperty()
     @Column({ nullable: true })
     avaliacao:number
-
-    // Se usuário foi autenticado pelo Google
-    // @Column({ default: 'local' }) 
-    // provider: string;
 
     // Relacionamentos 
     @ApiProperty() 
