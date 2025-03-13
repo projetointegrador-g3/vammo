@@ -86,7 +86,7 @@ export class AuthService{
                     senha: '',  // Google não exige senha
                     foto: picture,
                     tipo_user: 'comum', // Definindo o tipo_user como 'google' (valor padrão)
-                    data_aniversario: null, // Definindo null para o aniversário
+                    data_aniversario: '', 
                     genero: '', // Definindo uma string vazia para o gênero
                     avaliacao: 0,  
                     viagem: [], 

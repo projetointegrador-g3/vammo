@@ -24,7 +24,7 @@ export class Usuario{
     @Transform(({value}:TransformFnParams)=>value?.trim())
     @Column({length:10, nullable:true})
     @ApiProperty()
-    data_aniversario: string | null
+    data_aniversario: string 
 
     @Column({length:255, nullable: true})
     @ApiProperty()
