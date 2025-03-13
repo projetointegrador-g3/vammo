@@ -10,10 +10,17 @@ export class AuthController {
     
     constructor(private authService: AuthService) { }
 
+    // Login com email e senha
     @UseGuards(LocalAuthGuard)
     @HttpCode(HttpStatus.OK)
     @Post('/login')
     login(@Body() usuario: UsuarioLogin): Promise<any> {
         return this.authService.login(usuario);
+    }
+
+    // Login com Google
+    @Post('google')
+    async googleLogin(@Body('token') token: string) {
+        return this.authService.loginWithGoogle(token);
     }
 }

@@ -13,13 +13,23 @@ async function bootstrap() {
   .setVersion('1.0')
   .addBearerAuth()
   .build();
+
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/swagger', app, document);
   
   process.env.TZ = '-03:00';
 
   app.useGlobalPipes(new ValidationPipe());
-  app.enableCors()
+
+  // Atovar CORS com origens permitidas
+  app.enableCors(
+    {
+      origin: ["http://localhost:5173", "https://vammo.netlify.app"], // Domínios que podem acessar o backend
+      methods: "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      allowedHeaders: "Content-Type, Authorization",
+      credentials: true,
+    }
+  )
   await app.listen(process.env.PORT || 4000);
 }
 bootstrap();

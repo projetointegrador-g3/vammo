@@ -11,7 +11,10 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true, // Torna as variáveis de ambiente acessíveis em toda a aplicação
+      envFilePath: '.env',
+    }),
     TypeOrmModule.forRootAsync({
       useClass: ProdService, 
       imports: [ConfigModule],
